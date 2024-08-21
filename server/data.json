@@ -1,0 +1,167 @@
+[
+    {
+        "make": "Toyota",
+        "model": "Camry",
+        "year": 2020,
+        "price": 24000,
+        "mileage": 15000,
+        "color": "Silver",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A reliable and efficient sedan."
+    },
+    {
+        "make": "Honda",
+        "model": "Civic",
+        "year": 2018,
+        "price": 18000,
+        "mileage": 30000,
+        "color": "Black",
+        "transmission": "Manual",
+        "fuelType": "Gasoline",
+        "description": "Sporty and fun to drive, with great fuel economy."
+    },
+    {
+        "make": "Ford",
+        "model": "Mustang",
+        "year": 2021,
+        "price": 35000,
+        "mileage": 5000,
+        "color": "Red",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A powerful muscle car with modern tech features."
+    },
+    {
+        "make": "Tesla",
+        "model": "Model S",
+        "year": 2022,
+        "price": 80000,
+        "mileage": 1000,
+        "color": "White",
+        "transmission": "Automatic",
+        "fuelType": "Electric",
+        "description": "A luxury electric sedan with cutting-edge technology."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    },
+    {
+        "make": "Chevrolet",
+        "model": "Tahoe",
+        "year": 2019,
+        "price": 45000,
+        "mileage": 20000,
+        "color": "Blue",
+        "transmission": "Automatic",
+        "fuelType": "Gasoline",
+        "description": "A spacious SUV with excellent towing capacity."
+    }
+]

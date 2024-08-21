@@ -1,0 +1,22 @@
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Add this to your CSS file or a <style> tag */
+.hide-number-input-arrows {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.hide-number-input-arrows::-webkit-inner-spin-button,
+.hide-number-input-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari */
+  margin: 0; /* Remove default margin */
+}

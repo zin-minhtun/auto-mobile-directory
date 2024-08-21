@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
-import TextsmsIcon from '@mui/icons-material/Textsms';
+// import TextsmsIcon from '@mui/icons-material/Textsms';
 
 export default function Navigation() {
 	return (
@@ -17,9 +17,9 @@ export default function Navigation() {
 						<img src={logo} alt="Logo" className="w-48 opacity-95" />
 					</Link>
 				</li>
-				<li className="text-gray-50">
+				{/* <li className="text-gray-50">
 					<TextsmsIcon sx={{ fontSize: 30 }} />
-				</li>
+				</li> */}
 			</ul>
 		</nav>
 	);

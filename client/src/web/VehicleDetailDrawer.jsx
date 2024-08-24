@@ -1,10 +1,9 @@
-// import React from "react";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import CircleIcon from "@mui/icons-material/Circle";
 
-export default function VehicleDetailDrawer({drawerOpen, setDrawerOpen, selectedVehicle}) {
+export default function VehicleDetailDrawer({ drawerOpen, setDrawerOpen, selectedVehicle }) {
 	return (
 		<>
 			{/* Bottom Drawer */}
@@ -13,8 +12,7 @@ export default function VehicleDetailDrawer({drawerOpen, setDrawerOpen, selected
 				open={drawerOpen}
 				onClose={() => setDrawerOpen(false)}
 				PaperProps={{
-					className: "p-4 bg-gray-100 rounded-t-lg shadow-lg", // Tailwind CSS classes
-					style: { height: "30vh" },
+					className: "p-4 bg-gray-100 rounded-t-lg h-100vh shadow-lg"
 				}}
 			>
 				<div className="flex justify-between items-center">
@@ -60,11 +58,11 @@ export default function VehicleDetailDrawer({drawerOpen, setDrawerOpen, selected
 						{/* Add more details as needed */}
 					</div>
 				</div>
-				<div className="mt-auto mb-2 flex justify-between space-x-2 items-center pt-4 border-t border-gray-300/70">
-					<button className="bg-orange-400 w-1/2 text-white text-lg px-4 py-2 rounded-lg shadow-md focus:outline-none">
+				<div className="mt-auto mb-2 flex justify-between sm:justify-start space-x-2 items-center pt-4 border-t border-gray-300/70">
+					<button className="bg-orange-400 w-1/2 sm:w-40 text-white text-lg px-4 py-2 rounded-lg shadow-md focus:outline-none">
 						Message
 					</button>
-					<button className="bg-green-500 w-1/2 text-white text-lg px-4 py-2 rounded-lg shadow-md focus:outline-none">
+					<button className="bg-green-500 w-1/2 sm:w-40 text-white text-lg px-4 py-2 rounded-lg shadow-md focus:outline-none">
 						Call
 					</button>
 				</div>

@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { SkeletonCardList } from "./SkeletonCard";
 import { Link } from "react-router-dom";
 
-export default function FeaturedList({ pageChanged, featuredVehicles }) {
+export default function FeaturedList({ featuredVehicles }) {
 	const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 	const scrollRef = useRef(null);
 
@@ -33,7 +33,7 @@ export default function FeaturedList({ pageChanged, featuredVehicles }) {
 
 		// Clean up the interval on component unmount
 		return () => clearInterval(intervalId);
-	}, [pageChanged]);
+	}, []);
 
 	return (
 		<>

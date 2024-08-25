@@ -1,54 +1,38 @@
 import { useState, useEffect, useContext } from "react";
 import DirectoryList from "./DirectoryList";
 import FeaturedList from "./FeaturedList";
-import { SearchContext } from "./Main";
+import { VehicleContext } from "./Main";
 
 export default function Home() {
 	const {
-		loading,
-		totalPages,
 		searchQuery,
-		vehicles,
 		fetchVehicles,
 		featuredVehicles,
 		fetchFeaturedVehicles,
-	} = useContext(SearchContext);
+	} = useContext(VehicleContext);
 
 	const [currentPage, setCurrentPage] = useState(0);
-	const [pageChanged, setPageChanged] = useState(false); // New state to track page change
 	const [filter, setFilter] = useState("all");
 
 	useEffect(() => {
-		fetchFeaturedVehicles(0, 6, searchQuery);
-	}, [fetchFeaturedVehicles, pageChanged, searchQuery]);
+		fetchVehicles(currentPage, 6, searchQuery, filter);
+	}, [fetchVehicles, searchQuery, currentPage, filter]);
 
 	useEffect(() => {
-		fetchVehicles(currentPage, 6, searchQuery, filter);
-	}, [fetchVehicles, searchQuery, currentPage, pageChanged, filter]);
+		fetchFeaturedVehicles(0, 6, searchQuery);
+	}, [fetchFeaturedVehicles, searchQuery]);
 
 	return (
 		<>
 			{/* Featured Section */}
-			<FeaturedList
-				loading={loading}
-				currentPage={currentPage}
-				pageChanged={pageChanged}
-				featuredVehicles={featuredVehicles}
-				fetchFeaturedVehicles={fetchFeaturedVehicles}
-			/>
+			<FeaturedList featuredVehicles={featuredVehicles} />
+
 			{/* Car Lists */}
 			<DirectoryList
-				loading={loading}
 				currentPage={currentPage}
-				totalPages={totalPages}
 				setCurrentPage={setCurrentPage}
-				pageChanged={pageChanged}
-				setPageChanged={setPageChanged}
 				filter={filter}
 				setFilter={setFilter}
-				searchQuery={searchQuery}
-				vehicles={vehicles}
-				fetchVehicles={fetchVehicles}
 			/>
 		</>
 	);

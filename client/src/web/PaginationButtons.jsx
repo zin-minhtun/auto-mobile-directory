@@ -6,7 +6,7 @@ export default function PaginationButtons({
 	setCurrentPage,
     setPageChanged,
 }) {
-	const handlePageChange = (newPage) => {
+	const handleClickedChange = (newPage) => {
 		if (newPage >= 0 && newPage < totalPages) {
 			setCurrentPage(newPage);
             setPageChanged(true);
@@ -16,7 +16,7 @@ export default function PaginationButtons({
 	return (
 		<div className="flex justify-between items-center my-6 mx-3">
 			<button
-				onClick={() => handlePageChange(currentPage - 1)}
+				onClick={() => handleClickedChange(currentPage - 1)}
 				disabled={currentPage === 0}
 				className={`bg-gray-800 text-gray-100 px-4 py-2 rounded-md mx-1 ${
 					currentPage === 0 ? "bg-gray-400" : ""
@@ -28,7 +28,7 @@ export default function PaginationButtons({
 				Page {currentPage + 1} of {totalPages}
 			</span>
 			<button
-				onClick={() => handlePageChange(currentPage + 1)}
+				onClick={() => handleClickedChange(currentPage + 1)}
 				disabled={currentPage >= totalPages - 1}
 				className={`bg-gray-800 text-gray-100 px-4 py-2 rounded-md mx-1 ${
 					currentPage >= totalPages - 1 ? "bg-gray-400" : ""

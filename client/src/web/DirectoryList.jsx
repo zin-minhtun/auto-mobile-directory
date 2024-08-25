@@ -1,37 +1,46 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useCallback, useContext, useRef } from "react";
 import { SkeletonCard } from "./SkeletonCard";
 import PaginationButtons from "./PaginationButtons";
 import VehicleDetailDrawer from "./VehicleDetailDrawer";
+import { VehicleContext } from "./Main";
 // import PaginationButtons from "./PaginationButtons";
 
 export default function DirectoryList({
-	loading,
-	totalPages,
 	currentPage,
 	setCurrentPage,
-	pageChanged,
-	setPageChanged,
 	filter,
 	setFilter,
-	vehicles,
 }) {
 	const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 	const cardRef = useRef(null);
 
+	const { allVehicles, dispatch } = useContext(VehicleContext);
+	const vehicles = allVehicles.data;
+	const isLoading = allVehicles.loading;
+	const totalPages = allVehicles.totalPages;
+	const isPageChanged = allVehicles.pageChanged;
+
 	const [drawerOpen, setDrawerOpen] = useState(false); // Drawer open state
 	const [selectedVehicle, setSelectedVehicle] = useState(null); // Selected vehicle
 
+	const handlePageChanged = useCallback(
+		(status) => {
+			dispatch({ type: "CHANGE_PAGE", payload: status });
+		},
+		[dispatch]
+	);
+
 	// Scroll effect when page changes
 	useEffect(() => {
-		if (pageChanged && cardRef.current) {
+		if (isPageChanged && cardRef.current) {
 			window.scrollTo({
 				top: cardRef.current.offsetTop - 70,
 				behavior: "smooth",
 			});
 
-			setPageChanged(false); // Reset pageChanged after scroll
+			handlePageChanged(false); // Reset pageChanged after scroll
 		}
-	}, [pageChanged, setPageChanged]); // Add pageChanged to the dependencies
+	}, [isPageChanged, handlePageChanged]); // Add pageChanged to the dependencies
 
 	// Handle card click
 	const handleCardClick = (vehicle) => {
@@ -50,7 +59,7 @@ export default function DirectoryList({
 						onClick={() => {
 							setFilter("all");
 							setCurrentPage(0);
-							setPageChanged(true); // Mark that the page was changed by the user
+							handlePageChanged(true); // Mark that the page was changed by the user
 						}}
 					>
 						All
@@ -62,7 +71,7 @@ export default function DirectoryList({
 						onClick={() => {
 							setFilter("for_sale");
 							setCurrentPage(0);
-							setPageChanged(true); // Mark that the page was changed by the user
+							handlePageChanged(true); // Mark that the page was changed by the user
 						}}
 					>
 						For Sale
@@ -74,7 +83,7 @@ export default function DirectoryList({
 						onClick={() => {
 							setFilter("sold");
 							setCurrentPage(0);
-							setPageChanged(true); // Mark that the page was changed by the user
+							handlePageChanged(true); // Mark that the page was changed by the user
 						}}
 					>
 						Sold
@@ -83,18 +92,18 @@ export default function DirectoryList({
 			</div>
 
 			<div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 px-2 sm:px-4">
-				{!loading && vehicles.length === 0 ? (
+				{!isLoading && vehicles.length === 0 ? (
 					<div className="col-span-full text-center py-8 text-gray-500">
 						<p>No vehicles found.</p>
 					</div>
 				) : (
-					vehicles.map((vehicle, index) => (
+					allVehicles.data.map((vehicle, index) => (
 						<div
 							key={vehicle?._id || index} // Use index as key during loading
 							className="relative rounded-lg overflow-hidden"
 							ref={index === 0 ? cardRef : null}
 						>
-							{loading || !vehicle ? (
+							{isLoading || !vehicle ? (
 								<SkeletonCard />
 							) : (
 								<div onClick={() => handleCardClick(vehicle)}>
@@ -148,7 +157,7 @@ export default function DirectoryList({
 				currentPage={currentPage}
 				totalPages={totalPages}
 				setCurrentPage={setCurrentPage}
-				setPageChanged={setPageChanged}
+				setPageChanged={handlePageChanged}
 			/>
 
 			<VehicleDetailDrawer

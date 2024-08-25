@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { SkeletonCard } from "./SkeletonCard";
 import { Link } from "react-router-dom";
-import { SearchContext } from "./Main";
+import { VehicleContext } from "./Main";
 import PaginationButtons from "./PaginationButtons";
 import VehicleDetailDrawer from "./VehicleDetailDrawer";
 
@@ -14,7 +14,7 @@ export default function AllFeaturedCars() {
 		totalPages,
 		featuredVehicles,
 		fetchFeaturedVehicles,
-	} = useContext(SearchContext);
+	} = useContext(VehicleContext);
 
 	const [currentPage, setCurrentPage] = useState(0);
 	const [pageChanged, setPageChanged] = useState(false);

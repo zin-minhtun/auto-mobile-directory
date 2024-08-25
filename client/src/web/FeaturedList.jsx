@@ -1,10 +1,13 @@
-import { useRef, useEffect } from "react";
+import { useRef, useContext, useEffect } from "react";
 import { SkeletonCardList } from "./SkeletonCard";
 import { Link } from "react-router-dom";
+import { VehicleContext } from "./Main";
 
-export default function FeaturedList({ featuredVehicles }) {
+export default function FeaturedList() {
 	const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 	const scrollRef = useRef(null);
+
+	const { featuredVehicles } = useContext(VehicleContext);
 
 	const scrollRight = () => {
 		if (scrollRef.current) {
@@ -37,7 +40,7 @@ export default function FeaturedList({ featuredVehicles }) {
 
 	return (
 		<>
-			{featuredVehicles.length > 0 && (
+			{featuredVehicles.data.length > 0 && (
 				<div className="px-2 sm:px-4 py-5">
 					<div className="flex flex-row justify-between mb-1.5 px-2">
 						<p className="text-gray-800 text-xl font-semibold">Featured Cars</p>
@@ -66,7 +69,7 @@ export default function FeaturedList({ featuredVehicles }) {
 
 						<div className="overflow-x-auto scrollbar-hidden" ref={scrollRef}>
 							<div className="flex space-x-3">
-								{featuredVehicles.map((vehicle) =>
+								{featuredVehicles.data.map((vehicle) =>
 									vehicle ? ( // Check if the vehicle object is not null/undefined
 										<div
 											key={vehicle._id}

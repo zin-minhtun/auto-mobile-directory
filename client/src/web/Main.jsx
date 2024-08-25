@@ -14,6 +14,12 @@ const initVehicleState = {
 		pageChanged: false,
 		data: Array(6).fill(null),
 	},
+	featuredVehicles: {
+		loading: true,
+		totalPages: 1,
+		pageChanged: false,
+		data: Array(6).fill(null),
+	},
 };
 
 const reducer = (state, action) => {
@@ -22,18 +28,38 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				allVehicles: {
+					...state.allVehicles,
 					loading: false,
 					totalPages: action.payload.totalPages,
-					pageChanged: false,
 					data: action.payload.vehicles,
 				},
 			};
-		
-		case "CHANGE_PAGE":
+
+		case "FETCH_FEATURED_VEHICLES_COMPLETED":
+			return {
+				...state,
+				featuredVehicles: {
+					...state.featuredVehicles,
+					loading: false,
+					totalPages: action.payload.totalPages,
+					data: action.payload.vehicles,
+				},
+			};
+
+		case "CHANGE_VEHICLES_PAGE":
 			return {
 				...state,
 				allVehicles: {
 					...state.allVehicles,
+					pageChanged: action.payload,
+				},
+			};
+
+		case "CHANGE_FEATURED_VEHICLES_PAGE":
+			return {
+				...state,
+				featuredVehicles: {
+					...state.featuredVehicles,
 					pageChanged: action.payload,
 				},
 			};
@@ -44,12 +70,8 @@ const reducer = (state, action) => {
 };
 
 export default function Main() {
-	const [loading, setLoading] = useState(false);
 	const [searchQuery, setSearchQuery] = useState("");
-	const [totalPages, setTotalPages] = useState(1);
-
 	const [vehicles, dispatch] = useReducer(reducer, initVehicleState);
-	const [featuredVehicles, setFeaturedVehicles] = useState(Array(6).fill(null)); // Initialize with placeholders
 
 	const fetchVehicles = useCallback(async (page, limit, search, filter) => {
 		try {
@@ -66,7 +88,6 @@ export default function Main() {
 	}, []);
 
 	const fetchFeaturedVehicles = useCallback(async (page, limit, search) => {
-		setLoading(true);
 		try {
 			const response = await axiosInstance.get(
 				"/api/vehicles/featured-vehicles",
@@ -74,12 +95,12 @@ export default function Main() {
 					params: { page: page + 1, limit, search },
 				}
 			);
-			setFeaturedVehicles(response.data.vehicles);
-			setTotalPages(response.data.totalPages);
+			dispatch({
+				type: "FETCH_FEATURED_VEHICLES_COMPLETED",
+				payload: response.data,
+			});
 		} catch (error) {
 			console.error("Error fetching vehicles:", error);
-		} finally {
-			setLoading(false);
 		}
 	}, []);
 
@@ -94,14 +115,10 @@ export default function Main() {
 			<VehicleContext.Provider
 				value={{
 					searchQuery,
-					loading,
-					setLoading,
-					totalPages,
-					setTotalPages,
 					dispatch,
 					allVehicles: vehicles.allVehicles,
+					featuredVehicles: vehicles.featuredVehicles,
 					fetchVehicles,
-					featuredVehicles,
 					fetchFeaturedVehicles,
 				}}
 			>

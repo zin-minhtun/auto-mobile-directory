@@ -25,7 +25,7 @@ export default function DirectoryList({
 
 	const handlePageChanged = useCallback(
 		(status) => {
-			dispatch({ type: "CHANGE_PAGE", payload: status });
+			dispatch({ type: "CHANGE_VEHICLES_PAGE", payload: status });
 		},
 		[dispatch]
 	);
@@ -97,7 +97,7 @@ export default function DirectoryList({
 						<p>No vehicles found.</p>
 					</div>
 				) : (
-					allVehicles.data.map((vehicle, index) => (
+					vehicles.map((vehicle, index) => (
 						<div
 							key={vehicle?._id || index} // Use index as key during loading
 							className="relative rounded-lg overflow-hidden"

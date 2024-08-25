@@ -7,7 +7,6 @@ export default function Home() {
 	const {
 		searchQuery,
 		fetchVehicles,
-		featuredVehicles,
 		fetchFeaturedVehicles,
 	} = useContext(VehicleContext);
 
@@ -25,7 +24,7 @@ export default function Home() {
 	return (
 		<>
 			{/* Featured Section */}
-			<FeaturedList featuredVehicles={featuredVehicles} />
+			<FeaturedList />
 
 			{/* Car Lists */}
 			<DirectoryList

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useCallback, useEffect, useContext } from "react";
 import { SkeletonCard } from "./SkeletonCard";
 import { Link } from "react-router-dom";
 import { VehicleContext } from "./Main";
@@ -8,18 +8,23 @@ import VehicleDetailDrawer from "./VehicleDetailDrawer";
 export default function AllFeaturedCars() {
 	const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
-	const {
-		loading,
-		searchQuery,
-		totalPages,
-		featuredVehicles,
-		fetchFeaturedVehicles,
-	} = useContext(VehicleContext);
+	const { searchQuery, dispatch, featuredVehicles, fetchFeaturedVehicles } =
+		useContext(VehicleContext);
+	const vehicles = featuredVehicles.data;
+	const isLoading = featuredVehicles.loading;
+	const totalPages = featuredVehicles.totalPages;
+	const isPageChanged = featuredVehicles.pageChanged;
 
 	const [currentPage, setCurrentPage] = useState(0);
-	const [pageChanged, setPageChanged] = useState(false);
 	const [drawerOpen, setDrawerOpen] = useState(false); // Drawer open state
 	const [selectedVehicle, setSelectedVehicle] = useState(null); // Selected vehicle
+
+	const handlePageChanged = useCallback(
+		(status) => {
+			dispatch({ type: "CHANGE_FEATURED_VEHICLES_PAGE", payload: status });
+		},
+		[dispatch]
+	);
 
 	useEffect(() => {
 		fetchFeaturedVehicles(currentPage, 6, searchQuery);
@@ -27,15 +32,15 @@ export default function AllFeaturedCars() {
 
 	// Scroll effect when page changes
 	useEffect(() => {
-		if (pageChanged) {
+		if (isPageChanged) {
 			window.scrollTo({
 				top: 0,
 				behavior: "smooth",
 			});
 
-			setPageChanged(false);
+			handlePageChanged(false); // Reset pageChanged after scroll
 		}
-	}, [pageChanged, setPageChanged]);
+	}, [isPageChanged, handlePageChanged]);
 
 	// Handle card click
 	const handleCardClick = (vehicle) => {
@@ -52,17 +57,17 @@ export default function AllFeaturedCars() {
 				</div>
 			</div>
 			<div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 px-2 sm:px-4">
-				{!loading && featuredVehicles.length === 0 ? (
+				{!isLoading && vehicles.length === 0 ? (
 					<div className="col-span-full text-center py-8 text-gray-500">
 						<p>No vehicles found.</p>
 					</div>
 				) : (
-					featuredVehicles.map((vehicle, index) => (
+					vehicles.map((vehicle, index) => (
 						<div
 							key={vehicle?._id || index}
 							className="relative rounded-lg overflow-hidden cursor-pointer"
 						>
-							{loading || !vehicle ? (
+							{isLoading || !vehicle ? (
 								<SkeletonCard />
 							) : (
 								<div onClick={() => handleCardClick(vehicle)}>
@@ -116,7 +121,7 @@ export default function AllFeaturedCars() {
 				currentPage={currentPage}
 				totalPages={totalPages}
 				setCurrentPage={setCurrentPage}
-				setPageChanged={setPageChanged}
+				setPageChanged={handlePageChanged}
 			/>
 
 			<VehicleDetailDrawer

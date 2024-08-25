@@ -27,7 +27,7 @@ export default function Navigation() {
 	};
 
 	return (
-		<nav className="bg-gray-900 px-4">
+		<nav className="bg-gray-950 px-4">
 			<ul className="flex justify-between items-center">
 				<li className="text-gray-50">
 					{/* Hide the left icon on desktop */}

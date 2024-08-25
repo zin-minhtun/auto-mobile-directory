@@ -121,7 +121,7 @@ export default function DirectoryList({
 										alt={`${vehicle.make}`}
 										className="w-full h-48 object-cover"
 									/>
-									<div className="p-3 h-20 text-gray-100 bg-gray-700">
+									<div className="p-3 h-20 text-gray-100 bg-gray-900">
 										<div className="flex justify-between items-center mb-1">
 											<p className="text-base text-gray-100">
 												{`${vehicle.make}${vehicle.model}`.length > 12

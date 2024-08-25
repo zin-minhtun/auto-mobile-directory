@@ -13,6 +13,11 @@ export default function Home() {
 	const [currentPage, setCurrentPage] = useState(0);
 	const [filter, setFilter] = useState("all");
 
+	// Reset to the first page when the search query changes
+    useEffect(() => {
+        setCurrentPage(0);
+    }, [searchQuery]);
+
 	useEffect(() => {
 		fetchVehicles(currentPage, 6, searchQuery, filter);
 	}, [fetchVehicles, searchQuery, currentPage, filter]);

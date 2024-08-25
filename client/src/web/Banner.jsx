@@ -1,19 +1,14 @@
-import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import bannerImage from "../assets/Banner.jpg";
 
-export default function Banner({ handleSearch }) {
-	const [searchQuery, setSearchQuery] = useState("");
-
+export default function Banner({ searchQuery, handleSearch }) {
 	const handleInputChange = (event) => {
 		const value = event.target.value;
-		setSearchQuery(value);
 		handleSearch(value);
 	};
 
 	const clearSearch = () => {
-		setSearchQuery("");
 		handleSearch(""); // Clear the search in parent as well
 	};
 

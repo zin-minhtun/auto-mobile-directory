@@ -109,7 +109,7 @@ export default function Main() {
 			{/* Navigation */}
 			<Navigation />
 			{/* Banner */}
-			<Banner handleSearch={setSearchQuery} />
+			<Banner searchQuery={searchQuery} handleSearch={setSearchQuery} />
 
 			{/* Main Content */}
 			<VehicleContext.Provider

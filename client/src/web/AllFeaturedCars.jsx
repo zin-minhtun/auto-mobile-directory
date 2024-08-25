@@ -26,6 +26,11 @@ export default function AllFeaturedCars() {
 		[dispatch]
 	);
 
+	// Reset to the first page when the search query changes
+    useEffect(() => {
+        setCurrentPage(0);
+    }, [searchQuery]);
+
 	useEffect(() => {
 		fetchFeaturedVehicles(currentPage, 6, searchQuery);
 	}, [fetchFeaturedVehicles, currentPage, searchQuery]);

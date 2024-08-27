@@ -1,10 +1,49 @@
-// import React from "react";
+import { useState, useEffect } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
+import axiosInstance from "../../../api/axios";
 
 export default function SettingModal({ isOpen, onClose }) {
+	const [currentSetting, setCurrentSetting] = useState({});
+
+	useEffect(() => {
+		const fetchCurrentSetting = async () => {
+			try {
+				const response = await axiosInstance.get("/api/settings");
+				setCurrentSetting(response.data[0]);
+			} catch (error) {
+				console.error("Error fetching current setting:", error);
+			}
+		};
+
+		if (isOpen) {
+			fetchCurrentSetting();
+		}
+	}, [isOpen]);
+
+	const handleSubmit = async (values) => {
+		try {
+			if (currentSetting && currentSetting._id) {
+				// Update existing setting
+				const response = await axiosInstance.put(
+					`/api/settings/${currentSetting._id}`,
+					values
+				);
+				console.log("Setting updated successfully:", response.data);
+			} else {
+				// Create new setting if no _id exists
+				const response = await axiosInstance.post("/api/settings", values);
+				console.log("Setting created successfully:", response.data);
+			}
+		} catch (error) {
+			console.error("Error updating setting:", error);
+			// Handle the error, such as showing an error message
+		}
+		onClose();
+	};
+
 	if (!isOpen) return null;
 
 	return (
@@ -23,8 +62,22 @@ export default function SettingModal({ isOpen, onClose }) {
 					</IconButton>
 				</div>
 				<div>
-					<Formik>
-						{() => (
+					<Formik
+						initialValues={{
+							phone: currentSetting?.phone || "",
+							address: currentSetting?.address || "",
+							footerText: currentSetting?.footerText || "",
+						}}
+						enableReinitialize={true}
+						onSubmit={(values, { setSubmitting }) => {
+							console.log(values);
+							// Handle form submission
+							setSubmitting(true);
+							handleSubmit(values);
+							setSubmitting(false);
+						}}
+					>
+						{({ isSubmitting }) => (
 							<Form className="p-4" encType="multipart/form-data">
 								<div className="flex flex-col">
 									<div className="grid grid-cols-8 space-x-2">
@@ -79,7 +132,7 @@ export default function SettingModal({ isOpen, onClose }) {
 											</div>
 										</div>
 									</div>
-									
+
 									<div className="grid grid-cols-8 space-x-2">
 										<div className="col-span-2 h-20">
 											<label
@@ -148,7 +201,7 @@ export default function SettingModal({ isOpen, onClose }) {
 													type="submit"
 													className="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-900"
 												>
-													Submit
+													{isSubmitting ? "Submitting.." : "Submit"}
 												</button>
 											</div>
 										</div>

@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import PublicIcon from "@mui/icons-material/Public";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SettingModal from "./Modules/Setting/SettingModal";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Home() {
 	const location = useLocation();
 	const [settingModalOpen, setSettingModalOpen] = useState(false);
+
+	const auth = useContext(AuthContext)
+
+	useEffect(() => {
+		console.log(auth)
+	},[auth])
 
 	// Get the last segment of the pathname
 	const pathSegments = location.pathname

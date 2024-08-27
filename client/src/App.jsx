@@ -1,13 +1,15 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
-import './index.css';
+import "./index.css";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
 	return (
 		<div className="App">
 			<main>
-				<Outlet />
-				{/* This will render the child routes defined in your router */}
+				<AuthProvider>
+					<Outlet />
+				</AuthProvider>
 			</main>
 		</div>
 	);

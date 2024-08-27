@@ -25,6 +25,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Dynamically load modules' route based on configuration
 registerRouteByModule(app, "Vehicle", "/api/vehicles", "Module Disabled");
+registerRouteByModule(app, "Setting", "/api/settings", "Module Disabled");
 
 app.get("*", (req, res) => {
 	res.status(404).send("404 Not Found");
